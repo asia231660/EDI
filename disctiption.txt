@@ -1,0 +1,24 @@
+CSS
+* - to all parts of the page
+
+scroll-behavior: smooth; - to make trasitions between elements od the page smooth
+
+position: fixed - is used to keep the haeder always in the same place 
+                    top:0 and left: 0 are used for position of it in the page
+
+padding - space around object (1st number top and bottom, 2nd numner right and left)
+
+display: flex; - To display in one line
+
+justify-content: center; - Align the flex items at the left side of the container
+
+text-decoration: none; - to remove underlining (as in links)
+
+text-shadow: 2px 2px 4px #000000; - to add a shadow (1st number- horisontal shadow, 2nd-vertical, 3th blur-radious)
+
+min-height: 50vh; - min height of each section
+
+align-items: center; - to put items in the center of the sections
+
+HTML
+href - links to diffrent sections
