@@ -42,5 +42,16 @@
 API URL: https://my.api.mockaroo.com/Movies.json?key=447e31d0
 API curl: curl -H "X-API-Key: 447e31d0" https://my.api.mockaroo.com/Movies.json
 
-
+    Fetch API:
+fetch("https://api.mockaroo.com/api/<447e31d0>?count=1", {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+    },
+})
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => console.error("Error:", error));
 </html>
