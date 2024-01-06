@@ -38,6 +38,24 @@ section{
     background-color: beige;
     min-height: 100vh;
     display: flex;
+    align-items: center;
     justify-content: center;
+}
+
+
+p{font-size: 30px; font-weight: bold;}
+
+.p1{margin-left: 20px; margin-top: 60px;}
+.p2{margin-left: 200px; margin-top: 60px;}
+.p3{margin-left: 450px; margin-top: 60px;}
+.p4{margin-left: 900px; margin-top: 60px;}
+
+.form{display: flex;
     align-items: center;
 }
+label{font-weight: bold; font-size: 30px;}
+input[type=text]{
+    background-color: rgb(206, 45, 45) ;
+    color: white;
+    width: 100%;
+  }

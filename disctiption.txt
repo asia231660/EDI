@@ -22,3 +22,10 @@ align-items: center; - to put items in the center of the sections
 
 HTML
 href - links to diffrent sections
+
+
+this part is in div because otherway its all in the center of the page becauce of the function align items in sections
+<p class="p1">No plans for tonight?</p>
+                    <p class="p2">What about a movie?</p>
+                    <p class="p3">You will find plenty of them on our webside.</p>
+                    <p class="p4">Just pick one and enjoy!</p>

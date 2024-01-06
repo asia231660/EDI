@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> for now final project</title>
+        <title>Final project</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="script.js">
     </head>
@@ -11,39 +11,40 @@
 
             <nav>
                 <a href="#intro">Introduction</a>
-                <a href="#chart">Top 10</a>
-                <a href="#data">Rest</a>
+                <a href="#chart">Charts</a>
+                <a href="#data">List</a>
                 <a href="#serch">Trailers</a>
-                <a href="#chart2">Charts</a>
             </nav>
         </header>
 
-        <section id="intro">intro</section>
-        <section id="chart">Top 10</section>
-        <section id="data">Rest
+        <section id="intro">
+            <div class="row">
+                <div class="left">
+                    <p class="p1">No plans for tonight?</p>
+                    <p class="p2">What about a movie?</p>
+                    <p class="p3">You will find plenty of them on our webside.</p>
+                    <p class="p4">Just pick one and enjoy!</p>
+                </div>
+            </div>
+        </section>
+        <section id="chart">
+        </section>
+        <section id="data">
+            <p>Here you can find list with 100 films:</p>
             <table class="table">
                 <thead></thead>
                 <tbody></tbody>
             </table>
         </section>
-        <section id="serch">Trailers</section>
-        <section id="chart2">Chart</section>
-        <section>
-        <h1>FILM RATING PAGE</h1>
-        <h2>Joanna Krzyzanowska, Nikola Deja, Julie Folkerts</h2>
-        <p>introduction to our page</p>
-        <p>search bar in yt maybe? with trailer</p>
-        <p>top films, 10 films are gonna be in chart the rest is gonna be in table </p>
-        <p> table </p>
-
-
-        <p>Optional work</p>
-
-
-        <p>Joanna how to do the charts in html and table</p>
-        <p>Nikola start with some building page(html and css)</p>
-        <p>Julie is trying to figure it out with api and table</p>
-    </section>
+        <section id="serch">
+            <div class="form">
+            <form action="https://www.youtube.com/search?">
+                <label for="fname">Enter the title and search trailer:</label><br>
+                <input type="text" id="q" name="q" value=""><br>
+                <input type="submit" value="Search">
+               </form>
+            </div>
+        </section>
     </body>
 API URL: https://my.api.mockaroo.com/Movies.json?key=447e31d0
 API curl: curl -H "X-API-Key: 447e31d0" https://my.api.mockaroo.com/Movies.json
