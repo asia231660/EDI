@@ -3,7 +3,7 @@
     <head>
         <title>Final project</title>
         <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <header>
@@ -27,11 +27,22 @@
                 </div>
         </section>
         <section id="chart">
+            <div>
+                <p class="p5">To make choosing a movie easier, we wanted to present some statistics:</p>
+                <div id="moviesContainer"></div>
+                <div class="chart-container">
+                    <canvas id="durationChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="releaseDateChart"></canvas>
+                </div>
+            </div>
         </section>
         <section id="data">
             <div>
             <div>
-                <p>Here you can find list with 100 films:</p>
+                <p class="p6">Here you can find list with 100 films:</p>
             </div>
             <div>
                 <table class="table">
@@ -77,6 +88,7 @@
 
 
     <script>
+        var moviesData = [];
         fetch("https://my.api.mockaroo.com/Movies.json?key=447e31d0", {
             method: "GET",
             headers: {
@@ -86,6 +98,8 @@
         })
             .then(response => response.json())
             .then(data => {
+                moviesData=data
+                console.log(moviesData);
                 console.log(data);
                 let body ="";
                 data.forEach(element => {
@@ -95,9 +109,110 @@
                     body+="</tr>"
                 });
                 document.getElementById("tbody").innerHTML=body;
-            })
+
+                moviesData.sort(function (a, b) {
+                    return b.rating - a.rating;
+                });
+
+
+
+                for (var i = 0; i < Math.min(10, moviesData.length); i++) {
+                    var movie = moviesData[i];
+                    var movieElement = document.createElement('div');
+                    movieElement.className = 'movie';
+
+                    movieElement.innerHTML = `
+                        <h2>${movie.title}</h2>
+                        <p>Genre: ${movie.genre}</p>
+                        <p>Rating: ${movie.rating}</p>
+                        <p>Release Date: ${movie.release_date}</p>
+                        <p>Director: ${movie.director}</p>
+                        <p>Language: ${movie.language}</p>
+                        <p>Country: ${movie.country}</p>
+                        <p>Duration: ${movie.duration} minutes</p>
+                    `;
+
+                }
+
+                var durations = moviesData.map(function (movie) {
+                    return movie.duration;
+                });
+
+                var durationLabels = ['More than 150 min', 'More than 120 min', 'More than 90 min', 'Less than 90 min'];
+
+                var ctxDuration = document.getElementById('durationChart').getContext('2d');
+                var durationChart = new Chart(ctxDuration, {
+                    type: 'pie',
+                    data: {
+                        labels: durationLabels,
+                        datasets: [{
+                            data: [
+                                durations.filter(duration => duration > 150).length,
+                                durations.filter(duration => duration > 120 && duration <= 150).length,
+                                durations.filter(duration => duration > 90 && duration <= 120).length,
+                                durations.filter(duration => duration <= 90).length
+                            ],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                            ],
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Movie Durations Distribution'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                });
+
+                var releaseDates = moviesData.map(function (movie) {
+                    return new Date(movie.release_date).getFullYear();
+                });
+
+                var currentDate = new Date().getFullYear();
+                var releaseDateLabels = Array.from({ length: currentDate - Math.min(...releaseDates) + 1 }, (_, i) => (currentDate - i).toString());
+
+                var ctxReleaseDate = document.getElementById('releaseDateChart').getContext('2d');
+                var releaseDateChart = new Chart(ctxReleaseDate, {
+                    type: 'bar',
+                    data: {
+                        labels: releaseDateLabels,
+                        datasets: [{
+                            label: 'Number of Movies Released',
+                            data: releaseDates.reduce(function (acc, releaseDate) {
+                                acc[releaseDate - Math.min(...releaseDates)]++;
+                                return acc;
+                            }, Array(releaseDateLabels.length).fill(0)),
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Movies Released Over the Years'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                });
+
+                })
             .catch(error => console.error("Error:", error));
+            
+            
     </script>
+
+
 
 
     
