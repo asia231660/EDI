@@ -3,7 +3,7 @@
     <head>
         <title>Final project</title>
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="script.js">
+        <script src="script.js"></script>
     </head>
     <body>
         <header>
@@ -14,27 +14,47 @@
                 <a href="#chart">Charts</a>
                 <a href="#data">List</a>
                 <a href="#serch">Trailers</a>
+                <a href="#authors">Authors</a>
             </nav>
         </header>
 
         <section id="intro">
-            <div class="row">
-                <div class="left">
+                <div>
                     <p class="p1">No plans for tonight?</p>
                     <p class="p2">What about a movie?</p>
                     <p class="p3">You will find plenty of them on our webside.</p>
                     <p class="p4">Just pick one and enjoy!</p>
                 </div>
-            </div>
         </section>
         <section id="chart">
         </section>
         <section id="data">
-            <p>Here you can find list with 100 films:</p>
-            <table class="table">
-                <thead></thead>
-                <tbody></tbody>
-            </table>
+            <div>
+            <div>
+                <p>Here you can find list with 100 films:</p>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Title</th>
+                            <th>Genre</th>
+                            <th>Release Date</th>
+                            <th>Director</th>
+                            <th>Actor 1</th>
+                            <th>Actor 2</th>
+                            <th>Actor 3</th>
+                            <th>Rating</th>
+                            <th>Duration</th>
+                            <th>Language</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
         </section>
         <section id="serch">
             <div class="form">
@@ -45,12 +65,19 @@
                </form>
             </div>
         </section>
+        <section id="authors">
+            <div>
+                <p class="author">Authors</p>
+                <p class="author1">Nikola Deja</p>
+                <p class="author2">Joanna Krzyżanowska</p>
+                <p class="author3">Julie Folkerts</p>
+            </div>
+        </section>
     </body>
-API URL: https://my.api.mockaroo.com/Movies.json?key=447e31d0
-API curl: curl -H "X-API-Key: 447e31d0" https://my.api.mockaroo.com/Movies.json
+
 
     <script>
-        fetch("https://api.mockaroo.com/api/447e31d0?count=1", {
+        fetch("https://my.api.mockaroo.com/Movies.json?key=447e31d0", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -60,6 +87,14 @@ API curl: curl -H "X-API-Key: 447e31d0" https://my.api.mockaroo.com/Movies.json
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                let body ="";
+                data.forEach(element => {
+                    body+="<tr>"
+                    for(let i in element)
+                        body+=`<td>${element[i]}</td>`
+                    body+="</tr>"
+                });
+                document.getElementById("tbody").innerHTML=body;
             })
             .catch(error => console.error("Error:", error));
     </script>
