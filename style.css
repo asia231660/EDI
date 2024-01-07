@@ -60,6 +60,9 @@ th{background-color: rgb(206, 45, 45);
     color: beige;
 }
 td{text-align: center;}
+tr:nth-child(even){
+    background-color: rgb(255, 181, 181);
+}
 
 .form{display: flex;
     align-items: center;
